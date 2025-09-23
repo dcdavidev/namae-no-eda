@@ -1,0 +1,56 @@
+{
+  "name": "namae-no-eda",
+  "version": "0.0.0",
+  "description": "Keep your branch names tidy, like leaves on a tree",
+  "keywords": [
+    "github-actions",
+    "action",
+    "ci",
+    "workflow",
+    "branch-name-linter",
+    "linter"
+  ],
+  "homepage": "https://github.com/dcdavidev/namae-no-eda#readme",
+  "bugs": {
+    "url": "https://github.com/dcdavidev/namae-no-eda/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dcdavidev/namae-no-eda.git"
+  },
+  "license": "MIT",
+  "author": "Davide Di Criscito <davidedc@outlook.com>",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "commit": "cz",
+    "lint": "eslint --fix .",
+    "release": "release-it"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^19.8.1",
+    "@commitlint/config-conventional": "^19.8.1",
+    "@eslint/js": "^9.36.0",
+    "@eslint/json": "^0.13.2",
+    "@eslint/markdown": "^7.3.0",
+    "@yaml-js/config-prettier": "^0.1.4",
+    "commitizen": "^4.3.1",
+    "cz-conventional-changelog": "^3.3.0",
+    "eslint": "^9.36.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-prettier": "^5.5.4",
+    "eslint-plugin-simple-import-sort": "^12.1.1",
+    "globals": "^16.4.0",
+    "jsonc-eslint-parser": "^2.4.1",
+    "lefthook": "^1.13.4",
+    "prettier": "3.6.2",
+    "prettier-plugin-sh": "^0.18.0",
+    "release-it": "^19.0.5"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
+}
