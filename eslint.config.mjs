@@ -13,7 +13,6 @@ export default defineConfig([
   {
     files: ['**/*.{js,mjs,cjs}'],
     plugins: {
-      js,
       'import': importPlg,
       'simple-import-sort': simpleImportSort,
     },
