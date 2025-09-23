@@ -22,11 +22,19 @@ get_branch_name() {
 
 # Convert CSV string to array
 csv_to_array() {
-  local csv="$1"
-  IFS=',' read -r -a arr <<< "$csv"
-  echo "${arr[@]}"
+  local csv="${1-}"
+  local IFS=',' parts=()
+  read -r -a parts <<< "$csv"
+  local out=()
+  for tok in "${parts[@]}"; do
+    # trim leading/trailing whitespace
+    tok="${tok#"${tok%%[![:space:]]*}"}"
+    tok="${tok%"${tok##*[![:space:]]}"}"
+    [[ -n "$tok" ]] && out+=("$tok")
+  done
+  # NUL-delimit to preserve spaces safely
+  printf '%s\0' "${out[@]}"
 }
-
 # Check for exact match in array
 in_array() {
   local val="$1"
