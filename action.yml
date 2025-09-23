@@ -1,0 +1,37 @@
+name: 'namae-no-eda'
+description: 'Keep your branch names tidy, like leaves on a tree.'
+branding:
+  color: 'blue'
+  icon: 'git-branch'
+
+inputs:
+  branch_name:
+    description: 'Branch name to validate. Defaults to the branch triggering the workflow.'
+    required: false
+    default: ${{ github.head_ref || github.ref_name }}
+
+  allowed:
+    description: 'Comma-separated list of glob patterns that are allowed (e.g., fix/*,release/*). Branch passes if matched.'
+    required: true
+
+  exclude:
+    description: 'Comma-separated list of exact branch names to ignore (e.g., main, develop). Excluded branches bypass checks.'
+    required: false
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: Run branch lint
+      shell: bash
+      env:
+        INPUT_BRANCH_NAME: ${{ inputs.branch_name }}
+        INPUT_ALLOWED: ${{ inputs.allowed }}
+        INPUT_EXCLUDE: ${{ inputs.exclude }}
+      run: |
+        set -euo pipefail
+        ./bin/namae-no-eda.sh
