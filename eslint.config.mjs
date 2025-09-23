@@ -9,14 +9,14 @@ import json from '@eslint/json';
 import markdown from '@eslint/markdown';
 
 export default defineConfig([
-  globalIgnores(['node_modules/', 'package-lock.json'], 'Node'),
+  globalIgnores(['node_modules/**', 'package-lock.json'], 'Node'),
   {
     files: ['**/*.{js,mjs,cjs}'],
     plugins: {
       'import': importPlg,
       'simple-import-sort': simpleImportSort,
     },
-    extends: ['js/recommended'],
+    extends: [js.configs.recommended],
     languageOptions: { globals: globals.node },
     rules: {
       'sort-imports': 'off',
@@ -95,22 +95,22 @@ export default defineConfig([
   {
     files: ['**/*.json', '.czrc', '.release-it.json', 'package.json'],
     plugins: { json },
-    language: 'json/json',
+    language: json.languages.json,
     languageOptions: { parser: jsoncParser },
-    extends: ['json/recommended'],
+    extends: [json.configs.recommended],
   },
   {
     files: ['**/*.jsonc', '.vscode/**/*.json'],
     plugins: { json },
-    language: 'json/jsonc',
+    language: json.languages.jsonc,
     languageOptions: { parser: jsoncParser },
-    extends: ['json/recommended'],
+    extends: [json.configs.recommended],
   },
   {
     files: ['**/*.{md,mdx}'],
     plugins: { markdown },
-    extends: ['markdown/recommended'],
-    language: 'markdown/gfm',
+    extends: [markdown.configs.recommended],
+    language: markdown.languages.gfm,
     languageOptions: { frontmatter: 'yaml' },
     rules: { 'markdown/no-html': 'off' },
   },
