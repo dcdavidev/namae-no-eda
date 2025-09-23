@@ -100,9 +100,8 @@ validate_branch() {
 main() {
   branch=$(get_branch_name) || exit 1
 
-  read -r -a exclude <<< "$(csv_to_array "${INPUT_EXCLUDE:-}")"
-  read -r -a allowed <<< "$(csv_to_array "${INPUT_ALLOWED:?Allowed patterns are required}")"
-
+  mapfile -d '' -t exclude < <(csv_to_array "${INPUT_EXCLUDE:-}")
+  mapfile -d '' -t allowed < <(csv_to_array "${INPUT_ALLOWED:?Allowed patterns are required}")
   # Pass arrays as arguments with a separator
   validate_branch "$branch" "${exclude[@]}" "__SEP__" "${allowed[@]}" || exit 1
 }
