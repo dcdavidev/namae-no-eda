@@ -82,7 +82,6 @@
 
   "shellcheck.run": "onType",
 
-  "shellformat.path": "/snap/bin/shfmt",
   "shellformat.useEditorConfig": true,
   "shellformat.effectLanguages": [
     "shellscript",

@@ -3,6 +3,7 @@ import importPlg from 'eslint-plugin-import';
 import prettier from 'eslint-plugin-prettier/recommended';
 import simpleImportSort from 'eslint-plugin-simple-import-sort';
 import globals from 'globals';
+import jsoncParser from 'jsonc-eslint-parser';
 import js from '@eslint/js';
 import json from '@eslint/json';
 import markdown from '@eslint/markdown';
@@ -96,14 +97,14 @@ export default defineConfig([
     files: ['**/*.json', '.czrc', '.release-it.json', 'package.json'],
     plugins: { json },
     language: 'json/json',
-    languageOptions: { parser: await import('jsonc-eslint-parser') },
+    languageOptions: { parser: jsoncParser },
     extends: ['json/recommended'],
   },
   {
     files: ['**/*.jsonc', '.vscode/**/*.json'],
     plugins: { json },
     language: 'json/jsonc',
-    languageOptions: { parser: await import('jsonc-eslint-parser') },
+    languageOptions: { parser: jsoncParser },
     extends: ['json/recommended'],
   },
   {

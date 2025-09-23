@@ -1,10 +1,12 @@
 on:
   push:
-    branches:
-      - main
+    branches: [main]
+  pull_request:
+    branches: [main]
 
-name: "ShellCheck"
-permissions: {}
+name: 'ShellCheck'
+permissions:
+  contents: read
 
 jobs:
   shellcheck:
@@ -13,4 +15,4 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Run ShellCheck
-        uses: ludeeus/action-shellcheck@master
+        uses: ludeeus/action-shellcheck@v2

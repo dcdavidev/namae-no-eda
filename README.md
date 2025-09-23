@@ -45,6 +45,10 @@ jobs:
 
 If the branch name does not match any allowed patterns and is not excluded, the action will fail the workflow.
 
+## Code Reviews
+
+![CodeRabbit Pull Request Reviews](https://img.shields.io/coderabbit/prs/github/dcdavidev/namae-no-eda?utm_source=oss&utm_medium=github&utm_campaign=dcdavidev%2Fnamae-no-eda&labelColor=171717&color=FF570A&link=https%3A%2F%2Fcoderabbit.ai&label=CodeRabbit+Reviews)
+
 ## 📄 License
 
 This repository is licensed under the MIT License.

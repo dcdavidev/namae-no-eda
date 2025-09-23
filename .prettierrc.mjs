@@ -23,13 +23,13 @@ const config = {
       },
     },
     {
-      files: ['*.md', '*.mdx'],
+      files: ['**/*.md', '**/*.mdx'],
       options: {
         parser: 'markdown',
       },
     },
     {
-      files: ['*.yaml', '*.yml'],
+      files: ['**/*.yaml', '**/*.yml'],
       options: {
         printWidth: 80,
       },
