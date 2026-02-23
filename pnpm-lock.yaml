@@ -4,6 +4,9 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+overrides:
+  conventional-changelog-conventionalcommits: ^9.1.0
+
 importers:
 
   .:
@@ -18,13 +21,13 @@ importers:
         specifier: ^9.6.4
         version: 9.6.4
       '@eslint/js':
-        specifier: ^9.36.0
+        specifier: ^9.39.3
         version: 9.39.3
       '@eslint/json':
         specifier: ^0.13.2
         version: 0.13.2
       '@eslint/markdown':
-        specifier: ^7.3.0
+        specifier: ^7.5.1
         version: 7.5.1
       '@prettier/plugin-xml':
         specifier: ^3.4.2
@@ -57,7 +60,7 @@ importers:
         specifier: ^1.12.0
         version: 1.12.0
       eslint:
-        specifier: ^9.36.0
+        specifier: ^9.39.3
         version: 9.39.3(jiti@2.6.1)
       eslint-config-prettier:
         specifier: ^10.1.8
@@ -66,7 +69,7 @@ importers:
         specifier: ^2.32.0
         version: 2.32.0(@typescript-eslint/parser@8.56.0(eslint@9.39.3(jiti@2.6.1))(typescript@5.9.3))(eslint@9.39.3(jiti@2.6.1))
       eslint-plugin-prettier:
-        specifier: ^5.5.4
+        specifier: ^5.5.5
         version: 5.5.5(eslint-config-prettier@10.1.8(eslint@9.39.3(jiti@2.6.1)))(eslint@9.39.3(jiti@2.6.1))(prettier@3.6.2)
       eslint-plugin-simple-import-sort:
         specifier: ^12.1.1
@@ -75,13 +78,13 @@ importers:
         specifier: ^0.10.0
         version: 0.10.0(@types/estree@1.0.8)(eslint@9.39.3(jiti@2.6.1))(prettier@3.6.2)(typescript@5.9.3)
       globals:
-        specifier: ^16.4.0
+        specifier: ^16.5.0
         version: 16.5.0
       jsonc-eslint-parser:
-        specifier: ^2.4.1
+        specifier: ^2.4.2
         version: 2.4.2
       lefthook:
-        specifier: ^1.13.4
+        specifier: ^1.13.6
         version: 1.13.6
       prettier:
         specifier: 3.6.2
@@ -1395,10 +1398,6 @@ packages:
   conventional-changelog-angular@8.1.0:
     resolution: {integrity: sha512-GGf2Nipn1RUCAktxuVauVr1e3r8QrLP/B0lEUsFktmGqc3ddbQkhoJZHJctVU829U1c6mTSWftrVOCHaL85Q3w==}
     engines: {node: '>=18'}
-
-  conventional-changelog-conventionalcommits@7.0.2:
-    resolution: {integrity: sha512-NKXYmMR/Hr1DevQegFB4MwfM5Vv0m4UIxKZTTYuD98lpTknaZlSRrDOG4X7wIXpGkfsYxZTghUN+Qq+T0YQI7w==}
-    engines: {node: '>=16'}
 
   conventional-changelog-conventionalcommits@9.1.0:
     resolution: {integrity: sha512-MnbEysR8wWa8dAEvbj5xcBgJKQlX/m0lhS8DsyAAWDHdfs2faDJxTgzRYlRYpXSe7UiKrIIlB4TrBKU9q9DgkA==}
@@ -3942,7 +3941,7 @@ snapshots:
   '@commitlint/config-conventional@19.8.1':
     dependencies:
       '@commitlint/types': 19.8.1
-      conventional-changelog-conventionalcommits: 7.0.2
+      conventional-changelog-conventionalcommits: 9.1.0
 
   '@commitlint/config-conventional@20.4.2':
     dependencies:
@@ -5354,10 +5353,6 @@ snapshots:
       compare-func: 2.0.0
 
   conventional-changelog-angular@8.1.0:
-    dependencies:
-      compare-func: 2.0.0
-
-  conventional-changelog-conventionalcommits@7.0.2:
     dependencies:
       compare-func: 2.0.0
 
