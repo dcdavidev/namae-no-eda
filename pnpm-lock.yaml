@@ -30,7 +30,7 @@ importers:
         specifier: ^3.4.2
         version: 3.4.2(prettier@3.6.2)
       '@release-it/conventional-changelog':
-        specifier: ^10.0.1
+        specifier: ^10.0.5
         version: 10.0.5(conventional-commits-filter@5.0.0)(conventional-commits-parser@6.2.1)(release-it@19.2.4(@types/node@25.3.0))
       '@yaml-js/config-prettier':
         specifier: ^0.1.4
@@ -41,6 +41,9 @@ importers:
       commitlint-config-spellbookx:
         specifier: ^0.10.0
         version: 0.10.0(@types/node@25.3.0)(typescript@5.9.3)
+      conventional-changelog-conventionalcommits:
+        specifier: ^9.1.0
+        version: 9.1.0
       cspell:
         specifier: ^9.6.4
         version: 9.6.4
@@ -111,7 +114,7 @@ importers:
         specifier: ^2.0.6
         version: 2.0.6(prettier@3.6.2)
       release-it:
-        specifier: ^19.0.5
+        specifier: ^19.2.4
         version: 19.2.4(@types/node@25.3.0)
 
 packages:
