@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.7.0](https://github.com/dcdavidev/namae-no-eda/compare/v0.2.1...v0.7.0) (2026-02-23)
+
+### Features
+
+* enhance branch validation with random haikus and colors ([56c0074](https://github.com/dcdavidev/namae-no-eda/commit/56c0074a5d0631a4d1272cb527fca7a3d0df0ab9))
+
+### Bug Fixes
+
+* **release:** resolve 'whatBump is not a function' error by forcing conventionalcommits preset version ([17b1089](https://github.com/dcdavidev/namae-no-eda/commit/17b1089d339bb3f6a4c69177fbadbc73a7c3b761))
+
 ## <small>0.2.1 (2025-09-24)</small>
 
 * ci: add checkout ([a2178a3](https://github.com/dcdavidev/namae-no-eda/commit/a2178a3))
