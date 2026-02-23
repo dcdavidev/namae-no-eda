@@ -5,6 +5,51 @@ set -euo pipefail
 DEFAULT_ALLOWED="feat/*,fix/*,chore/*,docs/*,refactor/*,test/*,perf/*"
 DEFAULT_EXCLUDE="main,release/*"
 
+# Success and Error Haikus
+# shellcheck disable=SC2034
+SUCCESS_HAIKUS=(
+  "🌸 Quiet roots shelter forgotten branches."
+  "🌸 Flowing stream guides each name downstream."
+  "🌸 Soft petals fall where the path is clear."
+  "🌸 Wind whispers truth through the ancient leaves."
+  "🌸 The mountain stands firm in its steady name."
+  "🌸 Silver moon reflects a calm, steady flow."
+)
+
+# shellcheck disable=SC2034
+ERROR_HAIKUS=(
+  "👹 Lost branch drifts, no tree remembers it."
+  "👹 Oni grins—chaos blooms from broken names."
+  "👹 Shadows stretch long over paths unknown."
+  "👹 Thunder cracks the sky when a name is lost."
+  "👹 Thorns catch the hem of a straying branch."
+  "👹 Deep mist hides the path of the wanderer."
+)
+
+# Color support
+if [[ -t 1 ]]; then
+  readonly RED='\033[0;31m'
+  readonly GREEN='\033[0;32m'
+  readonly YELLOW='\033[0;33m'
+  readonly BLUE='\033[0;34m'
+  readonly NC='\033[0m'
+else
+  readonly RED=''
+  readonly GREEN=''
+  readonly YELLOW=''
+  readonly BLUE=''
+  readonly NC=''
+fi
+
+log_ok() { echo -e "${GREEN}[OK]${NC} ✅ $*"; }
+log_err() { echo -e "${RED}[ERROR]${NC} ❌ $*" >&2; }
+log_fatal() { echo -e "${RED}[FATAL]${NC} ❌ $*" >&2; }
+
+pick_random() {
+  local -n arr=$1
+  echo "${arr[RANDOM % ${#arr[@]}]}"
+}
+
 # Determine the branch name
 get_branch_name() {
   local branch="${INPUT_BRANCH_NAME:-}"
@@ -17,8 +62,8 @@ get_branch_name() {
   fi
 
   if [[ -z "$branch" ]]; then
-    echo "[FATAL] ❌ Could not determine branch name."
-    echo "👹 Lost branch drifts, no tree remembers it."
+    log_fatal "Could not determine branch name."
+    pick_random ERROR_HAIKUS >&2
     return 1
   fi
 
@@ -32,20 +77,12 @@ csv_to_array() {
   read -r -a parts <<< "$csv"
   local out=()
   for tok in "${parts[@]}"; do
+    # Trim whitespace
     tok="${tok#"${tok%%[![:space:]]*}"}"
     tok="${tok%"${tok##*[![:space:]]}"}"
     [[ -n "$tok" ]] && out+=("$tok")
   done
   printf '%s\0' "${out[@]}"
-}
-
-in_array() {
-  local val="$1"
-  shift
-  for e in "$@"; do
-    [[ "$e" == "$val" ]] && return 0
-  done
-  return 1
 }
 
 glob_match_any() {
@@ -64,14 +101,14 @@ validate_branch() {
 
   local -a exclude=()
   local -a allowed=()
-  local i=0
+  local parsing_allowed=0
 
   for arg in "$@"; do
-    if [[ "$arg" == "__SEP__" ]]; then
-      i=1
+    if [[ "$arg" == "--allowed" ]]; then
+      parsing_allowed=1
       continue
     fi
-    if [[ $i -eq 0 ]]; then
+    if [[ $parsing_allowed -eq 0 ]]; then
       exclude+=("$arg")
     else
       allowed+=("$arg")
@@ -79,30 +116,34 @@ validate_branch() {
   done
 
   if glob_match_any "$branch" "${exclude[@]}"; then
-    echo "[OK] ✅ Branch '$branch' is excluded from checks."
-    echo "🌸 Quiet roots shelter forgotten branches."
+    log_ok "Branch '${BLUE}$branch${NC}' is excluded from checks."
+    pick_random SUCCESS_HAIKUS
     return 0
   fi
 
   if glob_match_any "$branch" "${allowed[@]}"; then
-    echo "[OK] ✅ Branch '$branch' matches an allowed pattern."
-    echo "🌸 Flowing stream guides each name downstream."
+    log_ok "Branch '${BLUE}$branch${NC}' matches an allowed pattern."
+    pick_random SUCCESS_HAIKUS
     return 0
   fi
 
-  echo "[ERROR] ❌ Invalid branch name: $branch"
-  echo "   Must match one of the allowed patterns: ${allowed[*]}"
-  echo "👹 Oni grins—chaos blooms from broken names."
+  log_err "Invalid branch name: ${BLUE}$branch${NC}"
+  echo -e "   Must match one of: ${YELLOW}${allowed[*]}${NC}" >&2
+  pick_random ERROR_HAIKUS >&2
   return 1
 }
 
 main() {
+  local branch
   branch=$(get_branch_name) || exit 1
+
+  local -a exclude=()
+  local -a allowed=()
 
   mapfile -d '' -t exclude < <(csv_to_array "${INPUT_EXCLUDE:-$DEFAULT_EXCLUDE}")
   mapfile -d '' -t allowed < <(csv_to_array "${INPUT_ALLOWED:-$DEFAULT_ALLOWED}")
 
-  validate_branch "$branch" "${exclude[@]}" "__SEP__" "${allowed[@]}" || exit 1
+  validate_branch "$branch" "${exclude[@]}" "--allowed" "${allowed[@]}" || exit 1
 }
 
 main
