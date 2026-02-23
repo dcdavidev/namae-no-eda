@@ -1,38 +1,8 @@
-commit-msg:
-  jobs:
-    - name: lint commit msg
-      run: npx commitlint --verbose --edit {1}
-
-pre-commit:
-  follow: true
-  parallel: false
-  jobs:
-    - name: lint and format staged files
-      interactive: true
-      group:
-        piped: true
-        jobs:
-          - run: npx eslint --fix {staged_files}
-            exclude:
-              - '*.sh'
-              - '*.toml'
-              - '*.yaml'
-              - '*.yml'
-            stage_fixed: true
-          - run: npx prettier --ignore-unknown {staged_files} --write
-            glob:
-              - '*.sh'
-              - '*.toml'
-              - '*.yaml'
-              - '*.yml'
-            stage_fixed: true
-          - run: |
-              if command -v shfmt >/dev/null 2>&1; then
-                shfmt -w -i=2 {staged_files}
-              else
-                echo "[ERROR] shfmt missing. Install it!" >&2
-                exit 1
-              fi
-            glob:
-              - '*.sh'
-            stage_fixed: true
+remotes:
+  - git_url: https://github.com/spellbookx/lefthook
+    ref: main
+    refetch: true
+    refetch_frequency: 24h
+    configs:
+      - "@commit-msg/pnpx-commitlint.yml"
+      - "@pre-commit/pnpx-eslint-prettier.yml"
