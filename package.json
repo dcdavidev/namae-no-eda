@@ -1,6 +1,7 @@
 {
   "name": "namae-no-eda",
   "version": "0.2.1",
+  "private": true,
   "description": "Keep your branch names tidy, like leaves on a tree",
   "keywords": [
     "github-actions",
@@ -19,15 +20,19 @@
     "url": "git+https://github.com/dcdavidev/namae-no-eda.git"
   },
   "license": "MIT",
-  "private": true,
   "author": "Davide Di Criscito <davidedc@outlook.com>",
+  "type": "module",
   "scripts": {
     "commit": "cz",
     "lint": "eslint --fix .",
     "release": "release-it",
     "test": "test/bats/bin/bats test/namae-no-eda.bats"
   },
-  "type": "module",
+  "config": {
+    "commitizen": {
+      "path": "cz-git"
+    }
+  },
   "devDependencies": {
     "@commitlint/cli": "^19.8.1",
     "@commitlint/config-conventional": "^19.8.1",
@@ -64,11 +69,6 @@
     "prettier-plugin-tailwindcss": "^0.7.2",
     "prettier-plugin-toml": "^2.0.6",
     "release-it": "^19.0.5"
-  },
-  "config": {
-    "commitizen": {
-      "path": "cz-git"
-    }
   },
   "engines": {
     "node": ">=22.19.0"
