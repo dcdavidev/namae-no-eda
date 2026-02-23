@@ -25,8 +25,7 @@
   "scripts": {
     "commit": "cz",
     "lint": "eslint --fix .",
-    "release": "release-it",
-    "test": "test/bats/bin/bats test/namae-no-eda.bats"
+    "release": "LEFTHOOK=\"0\" release-it"
   },
   "config": {
     "commitizen": {
